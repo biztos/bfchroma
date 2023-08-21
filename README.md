@@ -1,14 +1,19 @@
 # bfchroma
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-go.svg)](https://forthebadge.com)[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
+__*This is a fork of [Depado/bfchroma](https://github.com/Depado/bfchroma).*__
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/Depado/bfchroma)](https://goreportcard.com/report/github.com/Depado/bfchroma)
-[![Build Status](https://drone.depa.do/api/badges/Depado/bfchroma/status.svg)](https://drone.depa.do/Depado/bfchroma)
-[![codecov](https://codecov.io/gh/Depado/bfchroma/branch/master/graph/badge.svg)](https://codecov.io/gh/Depado/bfchroma)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Depado/bfchroma/blob/master/LICENSE)
-[![Godoc](https://godoc.org/github.com/Depado/bfchroma?status.svg)](https://godoc.org/github.com/Depado/bfchroma)
-[![Sourcegraph](https://sourcegraph.com/github.com/Depado/bfchroma/-/badge.svg)](https://sourcegraph.com/github.com/Depado/bfchroma?badge)
-[![Say Thanks!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://saythanks.io/to/Depado)
+This fork supports custom lexical analysis for code guessing, or code
+*knowing* if you already know.
+
+[![GoDoc][docbadge]][doc] [![Coverage Status][covbadge]][cov]
+[![Go Report Card][rptcdbadge]][rptcd]
+
+[docbadge]: https://pkg.go.dev/badge/github.com/biztos/bfchroma.svg
+[doc]: https://pkg.go.dev/github.com/biztos/bfchroma
+[covbadge]: https://coveralls.io/repos/github/biztos/bfchroma/badge.svg
+[cov]: https://coveralls.io/github/biztos/bfchroma
+[rptcd]: https://goreportcard.com/badge/github.com/biztos/bfchroma
+[rptcdbadge]: https://goreportcard.com/report/github.com/biztos/bfchroma
 
 
 Integrating [Chroma](https://github.com/alecthomas/chroma) syntax highlighter as
@@ -20,7 +25,7 @@ This project requires and uses the `v2` version of
 [Blackfriday](https://github.com/russross/blackfriday/tree/v2).
 
 ```
-$ go get github.com/Depado/bfchroma/v2
+$ go get github.com/biztos/bfchroma/v2
 ```
 
 ## Features

@@ -1,4 +1,4 @@
-module github.com/Depado/bfchroma/v2
+module github.com/biztos/bfchroma/v2
 
 go 1.20
 
