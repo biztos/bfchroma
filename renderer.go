@@ -12,6 +12,9 @@ import (
 	bf "github.com/russross/blackfriday/v2"
 )
 
+// Analyser defines a function that returns the correct chroma.Lexer for src.
+type Analyser func(src string) chroma.Lexer
+
 // Option defines the functional option type
 type Option func(r *Renderer)
 
@@ -37,6 +40,26 @@ func ChromaStyle(s *chroma.Style) Option {
 func WithoutAutodetect() Option {
 	return func(r *Renderer) {
 		r.Autodetect = false
+	}
+}
+
+// DetectAs causes autodetection to always "detect" lang, using chroma's
+// lexers.Get function.  If lang is unknown then it will use lexers.Fallback.
+func DetectAs(lang string) Option {
+
+	lex := lexers.Get(lang)
+	if lex == nil {
+		lex = lexers.Fallback
+	}
+	return func(r *Renderer) {
+		r.Analyser = func(s string) chroma.Lexer { return lex }
+	}
+}
+
+// DetectLexer causes autodetection to always return lex.
+func DetectLexer(lex chroma.Lexer) Option {
+	return func(r *Renderer) {
+		r.Analyser = func(s string) chroma.Lexer { return lex }
 	}
 }
 
@@ -70,6 +93,7 @@ func NewRenderer(options ...Option) *Renderer {
 		}),
 		Style:      styles.Get("monokai"),
 		Autodetect: true,
+		Analyser:   lexers.Analyse,
 	}
 	for _, option := range options {
 		option(r)
@@ -84,9 +108,9 @@ func (r *Renderer) RenderWithChroma(w io.Writer, text []byte, data bf.CodeBlockD
 
 	// Determining the lexer to use
 	if len(data.Info) > 0 {
-		lexer = lexers.Get(string(data.Info))
+		lexer = lexers.Get(string(data.Info)) // e.g. ```python
 	} else if r.Autodetect {
-		lexer = lexers.Analyse(string(text))
+		lexer = r.Analyser(string(text))
 	}
 	if lexer == nil {
 		lexer = lexers.Fallback
@@ -105,6 +129,7 @@ func (r *Renderer) RenderWithChroma(w io.Writer, text []byte, data bf.CodeBlockD
 type Renderer struct {
 	Base          bf.Renderer
 	Autodetect    bool
+	Analyser      Analyser
 	ChromaOptions []html.Option
 	Style         *chroma.Style
 	Formatter     *html.Formatter

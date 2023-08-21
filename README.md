@@ -25,7 +25,7 @@ This project requires and uses the `v2` version of
 [Blackfriday](https://github.com/russross/blackfriday/tree/v2).
 
 ```
-$ go get github.com/biztos/bfchroma/v2
+$ go get github.com/biztos/bfchroma
 ```
 
 ## Features

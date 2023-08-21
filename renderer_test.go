@@ -181,3 +181,15 @@ func ExampleNewRenderer() {
 	h := bf.Run([]byte(md), bf.WithRenderer(r))
 	fmt.Println(string(h))
 }
+
+func ExampleDetectAs() {
+	md := "Know your go!\n\n```\nconst SomethingGoey = 1.234\n```"
+	r := NewRenderer(DetectAs("go"))
+
+	h := bf.Run([]byte(md), bf.WithRenderer(r))
+	fmt.Println(string(h))
+	// Output:
+	// <p>Know your go!</p>
+	// <pre style="color:#f8f8f2;background-color:#272822;"><code><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#a6e22e">SomethingGoey</span> = <span style="color:#ae81ff">1.234</span>
+	// </span></span></code></pre>
+}

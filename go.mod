@@ -1,4 +1,4 @@
-module github.com/biztos/bfchroma/v2
+module github.com/biztos/bfchroma
 
 go 1.20
 
