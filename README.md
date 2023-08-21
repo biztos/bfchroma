@@ -12,8 +12,8 @@ This fork supports custom lexical analysis for code guessing, or code
 [doc]: https://pkg.go.dev/github.com/biztos/bfchroma
 [covbadge]: https://coveralls.io/repos/github/biztos/bfchroma/badge.svg
 [cov]: https://coveralls.io/github/biztos/bfchroma
-[rptcd]: https://goreportcard.com/badge/github.com/biztos/bfchroma
-[rptcdbadge]: https://goreportcard.com/report/github.com/biztos/bfchroma
+[rptcd]: https://goreportcard.com/report/github.com/biztos/bfchroma
+[rptcdbadge]: https://goreportcard.com/badge/github.com/biztos/bfchroma
 
 
 Integrating [Chroma](https://github.com/alecthomas/chroma) syntax highlighter as
@@ -34,6 +34,11 @@ This renderer integrates chroma to highlight code with triple backtick notation.
 It will try to use the given language when available otherwise it will try to
 detect the language. If none of these two method works it will fallback to sane
 defaults.
+
+Alternatively, a specific `Analyser` function can be used, allowing full control
+over the language-guessing logic.  If the language is known in advance, a lexer
+can be passed in via the `DetectLexer` option-func, or the language name via
+`DetectAs`.
 
 ## Usage
 
@@ -77,6 +82,14 @@ r := bfchroma.NewRenderer(
 )
 ```
 
+Auto-detecting Kotlin for all unknown code blocks
+
+```go
+r := bfchroma.NewRenderer(
+	bfchroma.DetectAs("Kotlin"),
+)
+```
+
 Extend a blackfriday renderer
 
 ```go
@@ -105,7 +118,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/Depado/bfchroma/v2"
+	"github.com/biztos/bfchroma"
 
 	bf "github.com/russross/blackfriday/v2"
 )
